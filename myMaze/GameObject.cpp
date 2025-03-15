@@ -1,7 +1,7 @@
 #include "GameObject.h"
 
 GameObject::GameObject() {
-	this->texture = '_';
+	this->texture = ' ';
 	this->type = 'e';
 }
 

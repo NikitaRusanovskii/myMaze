@@ -11,7 +11,7 @@ int main() {
 
 	setlocale(LC_ALL, " ");
 
-	Maze m;
+	Maze m(20, 20);
 	Position plPos(1, 1);
 	Player pl(plPos);
 	Controller ct(pl);
@@ -23,7 +23,7 @@ int main() {
 	m.getTile(plPos).setContent(pl);
 	
 	while (isRunning) {
-		m.printMaze(pl.getPosition(), 6);
+		m.printMaze(pl.getPosition(), 10);
 		pl.printCountOfCoins();
 		pressedKey = _getch();
 

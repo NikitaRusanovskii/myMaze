@@ -127,16 +127,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="app.cpp" />
-    <ClCompile Include="coinRelease.cpp" />
-    <ClCompile Include="controllerRelease.cpp" />
-    <ClCompile Include="doorRealese.cpp" />
-    <ClCompile Include="gameObjectRelease.cpp" />
-    <ClCompile Include="mazeRelease.cpp" />
-    <ClCompile Include="playerRelease.cpp" />
-    <ClCompile Include="positionRelease.cpp" />
-    <ClCompile Include="tileRelease.cpp" />
-    <ClCompile Include="wallRelease.cpp" />
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Coin.cpp" />
+    <ClCompile Include="Controller.cpp" />
+    <ClCompile Include="Door.cpp" />
+    <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="Maze.cpp" />
+    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Position.cpp" />
+    <ClCompile Include="Tile.cpp" />
+    <ClCompile Include="Wall.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Coin.h" />

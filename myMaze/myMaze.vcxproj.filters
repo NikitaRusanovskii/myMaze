@@ -15,34 +15,34 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="app.cpp">
+    <ClCompile Include="Main.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="positionRelease.cpp">
+    <ClCompile Include="Position.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="gameObjectRelease.cpp">
+    <ClCompile Include="GameObject.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="tileRelease.cpp">
+    <ClCompile Include="Tile.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="mazeRelease.cpp">
+    <ClCompile Include="Maze.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="playerRelease.cpp">
+    <ClCompile Include="Player.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="controllerRelease.cpp">
+    <ClCompile Include="Controller.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="wallRelease.cpp">
+    <ClCompile Include="Wall.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="coinRelease.cpp">
+    <ClCompile Include="Coin.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="doorRealese.cpp">
+    <ClCompile Include="Door.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>
