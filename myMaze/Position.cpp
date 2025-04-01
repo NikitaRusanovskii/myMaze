@@ -1,18 +1,14 @@
 #include "Position.h"
 
-Position::Position() {
-	this->x = -1;
-	this->y = -1;
 
-};
+Position::Position(int x, int y) : x(x), y(y) {}
+Position::Position(const Position& pos) : x(pos.x), y(pos.y) {}
 
-Position::Position(int x, int y) {
-	this->x = x;
-	this->y = y;
+void Position::setX(int newX) {
+	x = newX;
 }
 
-void Position::setPosition(int newX, int newY) {
-	x = newX;
+void Position::setY(int newY) {
 	y = newY;
 }
 

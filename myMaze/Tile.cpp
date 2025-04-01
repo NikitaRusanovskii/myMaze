@@ -1,15 +1,21 @@
 #include "Tile.h"
 
-Tile::Tile(const Position& pos, const GameObject& content) : pos(pos), content(content) {};
-Tile::Tile() : pos(Position()), content(GameObject()) {};
-void Tile::setContent(const GameObject& newContent) {
-	this->content = newContent;
+
+Tile::Tile(std::shared_ptr<GameObject> obj, Position pos) : obj(obj), pos(pos) {}
+Tile::Tile(const Tile& tile) : obj(tile.obj), pos(tile.pos) {}
+
+std::shared_ptr<GameObject> Tile::getObj() {
+	return obj;
 }
 
-void Tile::removeContent() {
-	this->content = GameObject();
+Position Tile::getPosition() {
+	return pos;
 }
 
-GameObject Tile::getContent() {
-	return this->content;
+void Tile::setObj(std::shared_ptr<GameObject> newObj){
+	obj = newObj;
+}
+
+void Tile::setPosition(Position newPos) {
+	pos = newPos;
 }

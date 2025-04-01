@@ -1,20 +1,23 @@
 #pragma once
 #include "Tile.h"
+#include <vector>
 
 class Maze {
 private:
-	Tile** field;
-	int width, height;
+	int width, height, FOV, finished = 0;
+	std::vector<std::vector<std::shared_ptr<Tile>>> field;
+	std::shared_ptr<Player> player;
 public:
-	Maze();
-	Maze(int width, int height);
-	~Maze();
+	Maze(int width, int height, int FOV);
+	~Maze() = default;
 
-	void generateMaze();
-	void printMaze(Position plPos, int range);
+	void generate();
+	void print();
+	void toFinish();
+	bool isFinished();
 
-	int getWidth();
-	int getHeight();
-
-	Tile& getTile(Position pos);
+	std::shared_ptr<Tile> getTile(Position pos);
+	std::shared_ptr<Player> getPlayer();
+	friend std::ostream& operator << (std::ostream& os, const Maze& mz);
+	friend std::istream& operator>>(std::istream& ifs, Maze& mz);
 };

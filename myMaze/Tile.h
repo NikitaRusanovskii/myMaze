@@ -1,17 +1,20 @@
 #pragma once
-#include "Position.h"
-#include "GameObject.h"
+#include "GameObjects.h"
+#include <memory>
+
 
 class Tile {
 private:
+	std::shared_ptr<GameObject> obj;
 	Position pos;
-	GameObject content;
 public:
-	Tile();
-	Tile(const Position& pos,const GameObject& content);
+	Tile(std::shared_ptr<GameObject> obj = nullptr, Position pos = Position());
+	Tile(const Tile& tile);
+	~Tile() = default;
 
-	void setContent(const GameObject& newContent);
-	void removeContent();
+	std::shared_ptr<GameObject> getObj();
+	Position getPosition();
 
-	GameObject getContent();
+	void setObj(std::shared_ptr<GameObject> newObj);
+	void setPosition(Position newPos);
 };

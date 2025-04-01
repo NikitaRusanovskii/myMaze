@@ -1,15 +1,16 @@
 #pragma once
 
+
 class Position {
 private:
 	int x, y;
 public:
-	Position();
-	Position(int x, int y);
-
-	void setPosition(int newX, int newY);
+	Position(int x = 0, int y = 0);
+	Position(const Position& pos);
 
 	int getX();
 	int getY();
 
+	void setX(int newX);
+	void setY(int newY);
 };
