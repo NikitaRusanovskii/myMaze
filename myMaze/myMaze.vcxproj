@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{50456e9a-7957-40d0-9abf-49c94ea6e804}</ProjectGuid>
-    <RootNamespace>myMaze</RootNamespace>
+    <ProjectGuid>{d923a7c1-e0bf-4415-b036-ab023d536327}</ProjectGuid>
+    <RootNamespace>pumpumpum</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -127,27 +127,27 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Main.cpp" />
-    <ClCompile Include="Coin.cpp" />
-    <ClCompile Include="Controller.cpp" />
-    <ClCompile Include="Door.cpp" />
-    <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="Controllers.cpp" />
+    <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GameObjects.cpp" />
+    <ClCompile Include="GameObjectsFabric.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="MainFabric.cpp" />
     <ClCompile Include="Maze.cpp" />
-    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="EventHandler.cpp" />
     <ClCompile Include="Position.cpp" />
     <ClCompile Include="Tile.cpp" />
-    <ClCompile Include="Wall.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Coin.h" />
-    <ClInclude Include="Controller.h" />
-    <ClInclude Include="Door.h" />
-    <ClInclude Include="GameObject.h" />
+    <ClInclude Include="Controllers.h" />
+    <ClInclude Include="Game.h" />
+    <ClInclude Include="GameObjects.h" />
+    <ClInclude Include="GameObjectsFabric.h" />
+    <ClInclude Include="MainFabric.h" />
     <ClInclude Include="Maze.h" />
-    <ClInclude Include="Player.h" />
+    <ClInclude Include="EventHandler.h" />
     <ClInclude Include="Position.h" />
     <ClInclude Include="Tile.h" />
-    <ClInclude Include="Wall.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
