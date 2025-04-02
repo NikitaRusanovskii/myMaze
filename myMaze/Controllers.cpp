@@ -34,8 +34,6 @@ int PlayerController::keyHandler(char keyChar) {
 }
 
 void PlayerController::move(Position nextPos) {
-	EmptyFabric ef;
-	mz.getTile(nextPos)->setObj(player);
-	mz.getTile(player->getPosition())->setObj(ef.createObj(player->getPosition()));
+	mz.getTile(nextPos) += mz.getTile(player->getPosition());
 	player->setPosition(nextPos);
 }

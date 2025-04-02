@@ -18,3 +18,5 @@ public:
 	void setObj(std::shared_ptr<GameObject> newObj);
 	void setPosition(Position newPos);
 };
+
+std::shared_ptr<Tile> operator+=(std::shared_ptr<Tile> a, std::shared_ptr<Tile> b);

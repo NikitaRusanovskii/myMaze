@@ -75,7 +75,8 @@ ostream& operator<<(ostream& os, const Maze& mz) {
 			os << '\n';
 		}
 	}
-	os << mz.player->getCountOfCoin();
+	os << "Coins : " << mz.player->getCountOfCoin() << endl;
+	os << "HP : " << mz.player->getHp();
 	return os;
 }
 

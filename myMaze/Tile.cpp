@@ -1,4 +1,5 @@
 #include "Tile.h"
+#include "MainFabric.h"
 
 
 Tile::Tile(std::shared_ptr<GameObject> obj, Position pos) : obj(obj), pos(pos) {}
@@ -18,4 +19,12 @@ void Tile::setObj(std::shared_ptr<GameObject> newObj){
 
 void Tile::setPosition(Position newPos) {
 	pos = newPos;
+}
+
+std::shared_ptr<Tile> operator+=(std::shared_ptr<Tile> a, std::shared_ptr<Tile> b) {
+	EmptyFabric ef;
+	std::shared_ptr<GameObject> tempGO = b->getObj();
+	b->setObj(ef.createObj(b->getPosition()));
+	a->setObj(tempGO);
+	return a;
 }
