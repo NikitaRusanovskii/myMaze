@@ -114,3 +114,7 @@ int Monster::getHp() {
 }
 
 void Monster::setHp(int _hp) { hp = _hp; }
+
+void Monster::doAttack(std::shared_ptr<Player> player) {
+	player->setHp(player->getHp() - weapon->getDamage());
+}

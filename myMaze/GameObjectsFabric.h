@@ -37,3 +37,9 @@ public:
 	PlayerFabric() = default;
 	std::shared_ptr<GameObject> createObj(Position pos) override;
 };
+
+class MonsterFabric : public GameObjectFabric {
+public:
+	MonsterFabric() = default;
+	std::shared_ptr<GameObject> createObj(Position pos) override;
+};

@@ -18,7 +18,26 @@ int PlayerEventHandler::onInteraction(Position objPos) {
 		if (pl->getCountOfCoin() >= 3) mz.toFinish();
 		return 0;
 	}
+	else if (type == "Monster") {
+		return 0;
+	}
 	else {
 		return 3;
 	}
+}
+
+
+MonsterEventHandler::MonsterEventHandler(Maze& mz, std::shared_ptr<Monster> monster) :
+	EventHandler(mz), monster(monster) {
+}
+
+int MonsterEventHandler::onInteraction(Position objPos) {
+	std::string type = mz.getTile(objPos)->getObj()->getType();
+	if (type == "Empty") {
+		return 1;
+	}
+	if (type == "Player") {
+		return 2;
+	}
+	return 3;
 }

@@ -1,6 +1,7 @@
 #pragma once
 #include "Position.h"
 #include <string>
+#include <memory>
 
 class GameObject {
 protected:
@@ -104,4 +105,5 @@ public:
 	void setPosition(Position newPos);
 	int getHp();
 	void setHp(int _hp);
+	void doAttack(std::shared_ptr<Player> player);
 };

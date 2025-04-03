@@ -15,49 +15,16 @@ Maze::Maze(int width, int height, int FOV) : width(width), height(height), FOV(F
 	}
 }
 
-void Maze::generate() {
-	MainFabric mainFabric;
-
-	string mz[] = {
-		"wwwwwwwwww",
-		"w________w",
-		"w________w",
-		"w_______0w",
-		"w_____H__w",
-		"w0_______w",
-		"w________w",
-		"w#_______w",
-		"w____0___w",
-		"wwwwwwwwww"
-	};
-
-	for (int y = 0; y < height; y++) {
-		for (int x = 0; x < width; x++) {
-			field[y][x]->setObj(mainFabric.createObj(mz[y][x], Position(x,y)));
-
-			if (field[y][x]->getObj()->getType() == "Player") player = static_pointer_cast<Player>(field[y][x]->getObj());
-
-			field[y][x]->setPosition(Position(x, y));
-		}
-	}
-
-}
-
-void Maze::print() {
-	for (int y = 0; y < height; y++) {
-		for (int x = 0; x < width; x++) {
-			cout << field[y][x]->getObj()->getTexture() << " ";
-		}
-		cout << endl;
-	}
-}
-
 shared_ptr<Tile> Maze::getTile(Position pos) {
 	return field[pos.getY()][pos.getX()];
 }
 
 shared_ptr<Player> Maze::getPlayer() {
 	return player;
+}
+
+shared_ptr<Monster> Maze::getMonster() {
+	return mn;
 }
 
 ostream& operator<<(ostream& os, const Maze& mz) {
@@ -100,6 +67,7 @@ istream& operator>>(istream& is, Maze& mz) {
 			mz.field[y][x]->setObj(mainFabric.createObj(tempTexture, Position(x, y)));
 
 			if (mz.field[y][x]->getObj()->getType() == "Player") mz.player = static_pointer_cast<Player>(mz.field[y][x]->getObj());
+			else if (mz.field[y][x]->getObj()->getType() == "Monster") mz.mn = static_pointer_cast<Monster>(mz.field[y][x]->getObj());
 
 			mz.field[y][x]->setPosition(Position(x, y));
 		}

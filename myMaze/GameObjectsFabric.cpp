@@ -21,3 +21,7 @@ shared_ptr<GameObject> EmptyFabric::createObj(Position pos) {
 shared_ptr<GameObject> PlayerFabric::createObj(Position pos) {
 	return make_shared<Player>('H', pos);
 }
+
+shared_ptr<GameObject> MonsterFabric::createObj(Position pos) {
+	return make_shared<Monster>('M', pos);
+}

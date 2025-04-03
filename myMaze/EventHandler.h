@@ -18,3 +18,13 @@ public:
 
 	int onInteraction(Position objPos) override;
 };
+
+class MonsterEventHandler : public EventHandler {
+private:
+	std::shared_ptr<Monster> monster;
+public:
+	MonsterEventHandler(Maze& mz, std::shared_ptr<Monster> monster);
+	~MonsterEventHandler() = default;
+
+	int onInteraction(Position objPos) override;
+};

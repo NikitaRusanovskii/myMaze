@@ -1,6 +1,8 @@
 #include "Controllers.h"
 #include "EventHandler.h"
 #include "GameObjectsFabric.h"
+#include <iostream>
+#include <ctime>
 
 using namespace std;
 
@@ -36,4 +38,58 @@ int PlayerController::keyHandler(char keyChar) {
 void PlayerController::move(Position nextPos) {
 	mz.getTile(nextPos) += mz.getTile(player->getPosition());
 	player->setPosition(nextPos);
+}
+
+MonsterController::MonsterController(Maze& mz, shared_ptr<Monster> monster) : Controller(mz), monster(monster) {}
+Position MonsterController::calculateNextPosition(int direction) {
+	Position nextPos;
+	int mx = monster->getPosition().getX(), my = monster->getPosition().getY();
+	switch (direction) {
+	case 0:
+		nextPos.setX(mx);
+		nextPos.setY(my - 1);
+		break;
+	case 1:
+		nextPos.setX(mx - 1);
+		nextPos.setY(my);
+		break;
+	case 2:
+		nextPos.setX(mx);
+		nextPos.setY(my + 1);
+		break;
+	case 3:
+		nextPos.setX(mx + 1);
+		nextPos.setY(my);
+		break;
+	}
+	return nextPos;
+}
+
+int MonsterController::handleEvent(Position nextPos) {
+	MonsterEventHandler meh(mz, monster);
+	int event = meh.onInteraction(nextPos) == 1;
+	if (event == 1) {
+		return 1;
+	}
+	else if (event == 2) {
+		// attack
+		return 2;
+	}
+	return 0;
+}
+
+void MonsterController::doMove() {
+	srand(time(0));
+	int direction = rand() % 4;
+	Position nextPos = calculateNextPosition(direction);
+	int codeOfTheEvent = handleEvent(nextPos);
+	cout << codeOfTheEvent;
+	if (codeOfTheEvent == 1) {
+		mz.getTile(nextPos) += mz.getTile(monster->getPosition());
+		monster->setPosition(nextPos);
+	}
+	else if (codeOfTheEvent == 2) {
+		monster->doAttack(std::static_pointer_cast<Player>(mz.getTile(nextPos)->getObj()));
+		cout << "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
+	}
 }

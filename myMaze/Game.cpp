@@ -16,8 +16,11 @@ void Game::run() {
 	Maze mz(mazeWidth, mazeHeight, FOV);
 	fl >> mz;
 	shared_ptr<Player> pl = mz.getPlayer();
+	shared_ptr<Monster> mn = mz.getMonster();
 	mz.getTile(pl->getPosition())->setObj(pl);
 	PlayerController pc(mz, pl);
+
+	MonsterController mc(mz, mn);
 
 	while (!mz.isFinished()) {
 		cout << mz;
@@ -32,6 +35,7 @@ void Game::run() {
 			return;
 		}
 
+		mc.doMove();
 		pc.keyHandler(key);
 
 		system("cls");
