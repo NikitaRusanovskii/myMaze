@@ -11,3 +11,7 @@ shared_ptr<GameObject> MainFabric::createObj(char texture, int x, int y){
 	if (texture == 'H') return make_shared<Player>(x, y, 'H');
 	else return make_shared<Empty>(' ');
 }
+
+shared_ptr<GameObject> EmptyFabric::createObj(char texture) {
+	return make_shared<Empty>(' ');
+}

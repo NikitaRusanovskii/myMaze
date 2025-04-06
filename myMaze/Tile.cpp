@@ -1,28 +1,44 @@
 #include "Tile.h"
 #include "GameObjects.h"
 #include "MazeDrawer.h"
+#include "Fabric.h"
 #include <memory>
 #include <vector>
 
 
 using namespace std;
 
-std::vector<std::shared_ptr<Observer>>& Observable::getSubs() {
+vector<shared_ptr<Observer>>& Observable::getSubs() {
 	return subscribers;
 }
 
 Tile::Tile(shared_ptr<GameObject> object) : Observable(), object(object) {}
-std::shared_ptr<GameObject> Tile::getObject() {
+shared_ptr<GameObject> Tile::getObject() {
 	return object;
 }
-void Tile::setObject(std::shared_ptr<GameObject> _object) {
+void Tile::setObject(shared_ptr<GameObject> _object) {
 	object = _object;
 }
 
-Tile& operator+=(Tile& curTile, Tile& otherTile) {
+std::shared_ptr<GameObject>& Tile::getObjectRef() {
+	return object;
+}
+
+shared_ptr<Tile> operator+=(shared_ptr<Tile> curTile, shared_ptr<Tile> otherTile) {
+	if (curTile->getObject()->getType() == "Wall") throw 1;
+	else if (curTile->getObject()->getType() == "Coin") throw 2;
+	else if (curTile->getObject()->getType() == "Door") throw 3;
+	else {
+		swap(curTile->getObjectRef(), otherTile->getObjectRef());
+		curTile->notify();
+	}
 	return curTile;
 }
-Tile& operator-=(Tile& curTile, Tile& otherTile) {
+shared_ptr<Tile> operator-=(shared_ptr<Tile> curTile, shared_ptr<Tile> otherTile) {
+	EmptyFabric ef;
+	curTile->setObject(ef.createObj(' '));
+	swap(curTile->getObjectRef(), otherTile->getObjectRef());
+	curTile->notify();
 	return curTile;
 }
 

@@ -3,6 +3,7 @@
 class GameObject;
 class Observer;
 class Observable;
+class Player;
 class Tile;
 class Maze;
 class Empty;

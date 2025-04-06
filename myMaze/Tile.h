@@ -23,11 +23,12 @@ public:
 	~Tile() = default;
 
 	std::shared_ptr<GameObject> getObject();
+	std::shared_ptr<GameObject>& getObjectRef();
 	void setObject(std::shared_ptr<GameObject> _object);
 
 	void notify() override;
 
 };
 
-Tile& operator+=(Tile& curTile, Tile& otherTile);
-Tile& operator-=(Tile& curTile, Tile& otherTile);
+std::shared_ptr<Tile> operator+=(std::shared_ptr<Tile> curTile, std::shared_ptr<Tile> otherTile);
+std::shared_ptr<Tile> operator-=(std::shared_ptr<Tile> curTile, std::shared_ptr<Tile> otherTile);

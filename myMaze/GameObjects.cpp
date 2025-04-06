@@ -29,6 +29,12 @@ std::string Wall::getType() { return "Wall"; }
 
 Entity::Entity(int x, int y, char texture) : x(x), y(y), GameObject(texture){}
 
+int Entity::getX() { return x; }
+int Entity::getY() { return y; }
+
+void Entity::setX(int _x) { x = _x; }
+void Entity::setY(int _y) { y = _y; }
+
 Player::Player(int x, int y, char texture) : Entity(x, y, texture), countOfCoins(0) {}
 
 void Player::setCountOfCoins(int cc) {
@@ -42,3 +48,8 @@ int Player::getCountOfCoins() {
 void Player::gotCoin() {
 	countOfCoins++;
 }
+
+std::string Player::getType() { return "Player"; }
+
+Monster::Monster(int x, int y, char texture) : Entity(x, y, texture) {}
+std::string Monster::getType() { return "Monster"; }

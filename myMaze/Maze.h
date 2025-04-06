@@ -7,6 +7,7 @@
 class Maze {
 private:
 	int width, height;
+	std::shared_ptr<Player> player;
 	std::vector<std::vector<std::shared_ptr<Tile>>> field;
 public:
 	Maze(int width, int height);
@@ -19,6 +20,9 @@ public:
 
 	int getHeight();
 	int getWidth();
+
+	std::shared_ptr<Player> getPlayer();
+	void setPlayer(std::shared_ptr<Player> _player);
 
 };
 

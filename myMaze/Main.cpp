@@ -1,4 +1,5 @@
 #include "Maze.h"
+#include "Controller.h"
 #include "MazeDrawer.h"
 #include <iostream>
 #include <fstream>
@@ -19,6 +20,11 @@ int main() {
 
 	mzd.subscribeOnMaze();
 	file >> mz;
+	PlayerController pc(mz, mz.getPlayer());
+
+	while (1) {
+		pc.doMove();
+	}
 
 	file.close();
 

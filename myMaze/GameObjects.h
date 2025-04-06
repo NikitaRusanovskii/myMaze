@@ -49,6 +49,11 @@ protected:
 public:
 	Entity(int x, int y, char texture);
 	~Entity() = default;
+
+	int getX();
+	int getY();
+	void setX(int _x);
+	void setY(int _y);
 };
 
 class Player : public Entity {
@@ -62,4 +67,13 @@ public:
 	void gotCoin();
 	int getCountOfCoins();
 
+	std::string getType() override;
+
+};
+
+class Monster : public Entity {
+public:
+	Monster(int x, int y, char texture);
+	~Monster() = default;
+	std::string getType() override;
 };

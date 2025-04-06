@@ -127,6 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Controller.h" />
     <ClInclude Include="Fabric.h" />
     <ClInclude Include="GameObjects.h" />
     <ClInclude Include="Maze.h" />
@@ -135,6 +136,7 @@
     <ClInclude Include="__fwd.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Controller.cpp" />
     <ClCompile Include="Fabric.cpp" />
     <ClCompile Include="GameObjects.cpp" />
     <ClCompile Include="main.cpp" />
