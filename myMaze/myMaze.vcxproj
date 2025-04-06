@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{d923a7c1-e0bf-4415-b036-ab023d536327}</ProjectGuid>
-    <RootNamespace>pumpumpum</RootNamespace>
+    <ProjectGuid>{f9b7dda3-0cd8-4cf4-8157-f725fe98cc91}</ProjectGuid>
+    <RootNamespace>mmmaaaze</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -127,27 +127,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Controllers.cpp" />
-    <ClCompile Include="Game.cpp" />
-    <ClCompile Include="GameObjects.cpp" />
-    <ClCompile Include="GameObjectsFabric.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="MainFabric.cpp" />
-    <ClCompile Include="Maze.cpp" />
-    <ClCompile Include="EventHandler.cpp" />
-    <ClCompile Include="Position.cpp" />
-    <ClCompile Include="Tile.cpp" />
+    <ClInclude Include="Fabric.h" />
+    <ClInclude Include="GameObjects.h" />
+    <ClInclude Include="Maze.h" />
+    <ClInclude Include="MazeDrawer.h" />
+    <ClInclude Include="Tile.h" />
+    <ClInclude Include="__fwd.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Controllers.h" />
-    <ClInclude Include="Game.h" />
-    <ClInclude Include="GameObjects.h" />
-    <ClInclude Include="GameObjectsFabric.h" />
-    <ClInclude Include="MainFabric.h" />
-    <ClInclude Include="Maze.h" />
-    <ClInclude Include="EventHandler.h" />
-    <ClInclude Include="Position.h" />
-    <ClInclude Include="Tile.h" />
+    <ClCompile Include="Fabric.cpp" />
+    <ClCompile Include="GameObjects.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Maze.cpp" />
+    <ClCompile Include="MazeDrawer.cpp" />
+    <ClCompile Include="Tile.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

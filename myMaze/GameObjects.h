@@ -1,5 +1,4 @@
 #pragma once
-#include "Position.h"
 #include <string>
 #include <memory>
 
@@ -14,52 +13,6 @@ public:
 	char getTexture();
 
 	virtual std::string getType() = 0;
-};
-
-class Item {
-protected:
-	std::string target;
-	int damage, range;
-public:
-	Item(int damage, int range, std::string target);
-	Item(const Item& item);
-	int getDamage();
-	int getRange();
-	std::string getTarget();
-	virtual std::string getType() = 0;
-};
-
-class Sword : public Item {
-public:
-	Sword(int damage, int range, std::string target);
-	Sword(const Sword& sword);
-	std::string getType() override;
-};
-
-class Hand : public Item {
-public:
-	Hand() : Item(1, 1, "Monster") {}
-	std::string getType() { return "Hand"; }
-};
-
-class Player : public GameObject {
-private:
-	Position pos;
-	int countOfCoin, hp;
-	Item* weapon;
-public:
-	Player(char texture, Position pos);
-	Player(const Player& pl);
-	~Player() { delete weapon; }
-
-	std::string getType() override;
-	Position getPosition();
-	void setPosition(Position newPos);
-	void gotCoin();
-	void setCountOfCoin(int newCountOfCoin);
-	int getCountOfCoin();
-	int getHp();
-	void setHp(int _hp);
 };
 
 class Empty : public GameObject {
@@ -90,20 +43,23 @@ public:
 	std::string getType() override;
 };
 
-class Monster : public GameObject {
-private:
-	Position pos;
-	int hp;
-	Item* weapon;
+class Entity : public GameObject {
+protected:
+	int x, y;
 public:
-	Monster(char texture, Position pos);
-	Monster(const Monster& pl);
-	~Monster() { delete weapon; }
+	Entity(int x, int y, char texture);
+	~Entity() = default;
+};
 
-	std::string getType() override;
-	Position getPosition();
-	void setPosition(Position newPos);
-	int getHp();
-	void setHp(int _hp);
-	void doAttack(std::shared_ptr<Player> player);
+class Player : public Entity {
+private:
+	int countOfCoins;
+public:
+	Player(int x, int y, char texture);
+	~Player() = default;
+
+	void setCountOfCoins(int cc);
+	void gotCoin();
+	int getCountOfCoins();
+
 };

@@ -1,22 +1,33 @@
 #pragma once
-#include "GameObjects.h"
+#include "__fwd.h"
+#include <vector>
 #include <memory>
 
 
-class Tile {
-private:
-	std::shared_ptr<GameObject> obj;
-	Position pos;
+class Observable {
+protected:
+	std::vector<std::shared_ptr<Observer>> subscribers;
 public:
-	Tile(std::shared_ptr<GameObject> obj = nullptr, Position pos = Position());
-	Tile(const Tile& tile);
-	~Tile() = default;
-
-	std::shared_ptr<GameObject> getObj();
-	Position getPosition();
-
-	void setObj(std::shared_ptr<GameObject> newObj);
-	void setPosition(Position newPos);
+	Observable() = default;
+	~Observable() = default;
+	std::vector<std::shared_ptr<Observer>>& getSubs();
+	virtual void notify() = 0;
 };
 
-std::shared_ptr<Tile> operator+=(std::shared_ptr<Tile> a, std::shared_ptr<Tile> b);
+
+class Tile : public Observable {
+private:
+	std::shared_ptr<GameObject> object;
+public:
+	Tile(std::shared_ptr<GameObject> object = nullptr);
+	~Tile() = default;
+
+	std::shared_ptr<GameObject> getObject();
+	void setObject(std::shared_ptr<GameObject> _object);
+
+	void notify() override;
+
+};
+
+Tile& operator+=(Tile& curTile, Tile& otherTile);
+Tile& operator-=(Tile& curTile, Tile& otherTile);

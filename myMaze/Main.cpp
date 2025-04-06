@@ -1,14 +1,26 @@
-#include "Game.h"
+#include "Maze.h"
+#include "MazeDrawer.h"
+#include <iostream>
+#include <fstream>
 
-/*
-добавить наблюдатель
-добавить потоки. mtx для синхронизированния действий <thread>. Изменение лабиринта под одним и тем же mutex
-mutex из <mutex>
-*/
+
+using namespace std;
+
 
 int main() {
-	Game game("mamaze.txt");
-	game.run();
+
+	int width, height;
+	fstream file;
+	file.open("maze.txt");
+	file >> width >> height;
+
+	Maze mz(width, height);
+	MazeDrawer mzd(mz);
+
+	mzd.subscribeOnMaze();
+	file >> mz;
+
+	file.close();
 
 	return 0;
 }

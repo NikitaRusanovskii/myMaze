@@ -1,30 +1,33 @@
 #include "Tile.h"
-#include "MainFabric.h"
+#include "GameObjects.h"
+#include "MazeDrawer.h"
+#include <memory>
+#include <vector>
 
 
-Tile::Tile(std::shared_ptr<GameObject> obj, Position pos) : obj(obj), pos(pos) {}
-Tile::Tile(const Tile& tile) : obj(tile.obj), pos(tile.pos) {}
+using namespace std;
 
-std::shared_ptr<GameObject> Tile::getObj() {
-	return obj;
+std::vector<std::shared_ptr<Observer>>& Observable::getSubs() {
+	return subscribers;
 }
 
-Position Tile::getPosition() {
-	return pos;
+Tile::Tile(shared_ptr<GameObject> object) : Observable(), object(object) {}
+std::shared_ptr<GameObject> Tile::getObject() {
+	return object;
+}
+void Tile::setObject(std::shared_ptr<GameObject> _object) {
+	object = _object;
 }
 
-void Tile::setObj(std::shared_ptr<GameObject> newObj){
-	obj = newObj;
+Tile& operator+=(Tile& curTile, Tile& otherTile) {
+	return curTile;
+}
+Tile& operator-=(Tile& curTile, Tile& otherTile) {
+	return curTile;
 }
 
-void Tile::setPosition(Position newPos) {
-	pos = newPos;
-}
-
-std::shared_ptr<Tile> operator+=(std::shared_ptr<Tile> a, std::shared_ptr<Tile> b) {
-	EmptyFabric ef;
-	std::shared_ptr<GameObject> tempGO = b->getObj();
-	b->setObj(ef.createObj(b->getPosition()));
-	a->setObj(tempGO);
-	return a;
+void Tile::notify() {
+	for (int i = 0; i < subscribers.size(); i++) {
+		subscribers[i]->update();
+	}
 }

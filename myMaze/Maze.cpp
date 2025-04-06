@@ -1,12 +1,12 @@
 #include "Maze.h"
-#include "MainFabric.h"
-#include <memory>
-#include <math.h>
-#include <iostream>
+#include "GameObjects.h"
+#include "Tile.h"
+#include "Fabric.h"
 
 using namespace std;
 
-Maze::Maze(int width, int height, int FOV) : width(width), height(height), FOV(FOV) {
+
+Maze::Maze(int width, int height) : width(width), height(height) {
 	field.resize(height, vector<shared_ptr<Tile>>(width));
 	for (int y = 0; y < height; y++) {
 		for (int x = 0; x < width; x++) {
@@ -15,66 +15,45 @@ Maze::Maze(int width, int height, int FOV) : width(width), height(height), FOV(F
 	}
 }
 
-shared_ptr<Tile> Maze::getTile(Position pos) {
-	return field[pos.getY()][pos.getX()];
+std::shared_ptr<Tile> Maze::getTile(int x, int y) {
+	return field[y][x];
 }
 
-shared_ptr<Player> Maze::getPlayer() {
-	return player;
+void Maze::setTile(std::shared_ptr<Tile> tile, int x, int y) {
+	field[y][x] = tile;
 }
 
-shared_ptr<Monster> Maze::getMonster() {
-	return mn;
+int Maze::getHeight() {
+	return height;
 }
 
-ostream& operator<<(ostream& os, const Maze& mz) {
-	int px = mz.player->getPosition().getX();
-	int py = mz.player->getPosition().getY();
-	int dist;
-	for (int y = 0; y < mz.height; y++) {
-		for (int x = 0; x < mz.width; x++) {
-			dist = sqrt((x - px) * (x - px) + (y - py) * (y - py));
-			if ((int)dist <= mz.FOV) {
-				os << mz.field[y][x]->getObj()->getTexture() << " ";
-			}
+int Maze::getWidth() {
+	return width;
+}
+
+vector<vector<shared_ptr<Tile>>>& Maze::getField() {
+	return field;
+}
+
+std::ostream& operator<<(std::ostream& os, Maze& maze) {
+	for (int y = 0; y < maze.getHeight(); y++) {
+		for (int x = 0; x < maze.getWidth(); x++) {
+			os << maze.getTile(x, y)->getObject()->getTexture();
 		}
-		if (abs(y - mz.player->getPosition().getY()) <= mz.FOV) {
-			os << '\n';
-		}
+		os << '\n';
 	}
-	os << "Coins : " << mz.player->getCountOfCoin() << endl;
-	os << "HP : " << mz.player->getHp();
 	return os;
 }
 
-void Maze::toFinish() {
-	finished = 1;
-}
-
-bool Maze::isFinished() {
-	return (finished == 1) ? true : false;
-}
-
-istream& operator>>(istream& is, Maze& mz) {
-
-	MainFabric mainFabric;
+std::istream& operator>>(std::istream& is, Maze& maze) {
 	char tempTexture;
-	int coins;
-
-	for (int y = 0; y < mz.height; y++) {
-		for (int x = 0; x < mz.width; x++) {
+	MainFabric mainFabric;
+	for (int y = 0; y < maze.getHeight(); y++) {
+		for (int x = 0; x < maze.getWidth(); x++) {
 			is >> tempTexture;
-			mz.field[y][x]->setObj(mainFabric.createObj(tempTexture, Position(x, y)));
-
-			if (mz.field[y][x]->getObj()->getType() == "Player") mz.player = static_pointer_cast<Player>(mz.field[y][x]->getObj());
-			else if (mz.field[y][x]->getObj()->getType() == "Monster") mz.mn = static_pointer_cast<Monster>(mz.field[y][x]->getObj());
-
-			mz.field[y][x]->setPosition(Position(x, y));
+			maze.getTile(x, y)->setObject(mainFabric.createObj(tempTexture, x, y));
 		}
 	}
-	is >> coins;
-
-	mz.player->setCountOfCoin(coins);
-
+	maze.getTile(0, 0)->notify();
 	return is;
 }
