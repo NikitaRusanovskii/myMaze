@@ -2,6 +2,7 @@
 #include "GameObjects.h"
 #include "MazeDrawer.h"
 #include "Fabric.h"
+#include "MyExceptions.h"
 #include <memory>
 #include <vector>
 
@@ -25,9 +26,9 @@ std::shared_ptr<GameObject>& Tile::getObjectRef() {
 }
 
 shared_ptr<Tile> operator+=(shared_ptr<Tile> curTile, shared_ptr<Tile> otherTile) {
-	if (curTile->getObject()->getType() == "Wall") throw 1;
-	else if (curTile->getObject()->getType() == "Coin") throw 2;
-	else if (curTile->getObject()->getType() == "Door") throw 3;
+	if (curTile->getObject()->getType() == "Wall") throw WallException();
+	else if (curTile->getObject()->getType() == "Coin") throw CoinException();
+	else if (curTile->getObject()->getType() == "Door") throw DoorException();
 	else {
 		swap(curTile->getObjectRef(), otherTile->getObjectRef());
 		curTile->notify();

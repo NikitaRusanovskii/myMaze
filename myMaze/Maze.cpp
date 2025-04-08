@@ -51,6 +51,7 @@ std::ostream& operator<<(std::ostream& os, Maze& maze) {
 		}
 		os << '\n';
 	}
+	os << maze.getPlayer()->getCountOfCoins() << endl;
 	return os;
 }
 

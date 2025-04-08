@@ -129,19 +129,23 @@
   <ItemGroup>
     <ClInclude Include="Controller.h" />
     <ClInclude Include="Fabric.h" />
+    <ClInclude Include="Game.h" />
     <ClInclude Include="GameObjects.h" />
     <ClInclude Include="Maze.h" />
     <ClInclude Include="MazeDrawer.h" />
+    <ClInclude Include="MyExceptions.h" />
     <ClInclude Include="Tile.h" />
     <ClInclude Include="__fwd.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Controller.cpp" />
     <ClCompile Include="Fabric.cpp" />
+    <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObjects.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Maze.cpp" />
     <ClCompile Include="MazeDrawer.cpp" />
+    <ClCompile Include="MyExceptions.cpp" />
     <ClCompile Include="Tile.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

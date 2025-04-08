@@ -1,5 +1,6 @@
 #include "Controller.h"
 #include "GameObjects.h"
+#include "MyExceptions.h"
 #include "Maze.h"
 #include "Tile.h"
 #include <memory>
@@ -36,17 +37,19 @@ void PlayerController::doMove() {
 		player->setX(x);
 		player->setY(y);
 	}
-	catch (int indexOfEvent) {
-		if (indexOfEvent == 1) return;
-		else if (indexOfEvent == 2) {
-			maze.getTile(x, y) -= maze.getTile(player->getX(), player->getY());
+	catch (Exception ex) {
+		if (ex.getInfo() == WallException().getInfo()) return;
+		else if (ex.getInfo() == CoinException().getInfo()) {
+			shared_ptr<Tile> t = maze.getTile(x, y);
+			t -= maze.getTile(player->getX(), player->getY());
 			player->setX(x);
 			player->setY(y);
 			player->gotCoin();
+			t->notify();
 		}
-		else if (indexOfEvent == 3) {
+		else if (ex.getInfo() == DoorException().getInfo()) {
 			if (player->getCountOfCoins() == 3) {
-				cout << "FINISHED";
+				throw FinishException();
 			}
 		}
 		return;
