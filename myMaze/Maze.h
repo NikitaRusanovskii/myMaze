@@ -30,6 +30,9 @@ public:
 	void setMonster(std::shared_ptr<Monster> _monster);
 	void moveMonsters();
 
+	void drawPlayerFOV();
+	void drawPlayerInfo();
+
 };
 
 std::istream& operator>>(std::istream& is, Maze& maze);

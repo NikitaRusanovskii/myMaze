@@ -3,6 +3,7 @@
 #include "MazeDrawer.h"
 #include "Fabric.h"
 #include "MyExceptions.h"
+#include <iostream>
 #include <memory>
 #include <mutex>
 #include <vector>
@@ -52,6 +53,7 @@ shared_ptr<Tile> operator-=(shared_ptr<Tile> curTile, shared_ptr<Tile> otherTile
 }
 
 void Tile::notify() {
+	cout << "\033[2J\033[H";
 	for (int i = 0; i < subscribers.size(); i++) {
 		subscribers[i]->update();
 	}

@@ -7,7 +7,6 @@
 
 using namespace std;
 
-
 Maze::Maze(int width, int height) : width(width), height(height), mazeCountCoin(0) {
 	field.resize(height, vector<shared_ptr<Tile>>(width));
 	for (int y = 0; y < height; y++) {
@@ -47,18 +46,43 @@ shared_ptr<Player> Maze::getPlayer() {
 
 std::ostream& operator<<(std::ostream& os, Maze& maze) {
 	std::ostringstream buffer;
-	buffer << "\x1B[2J\x1B[H";
-
+	buffer << "map : \n";
 	for (int y = 0; y < maze.getHeight(); y++) {
 		for (int x = 0; x < maze.getWidth(); x++) {
 			buffer << maze.getTile(x, y)->getObject()->getTexture() << " ";
 		}
 		buffer << '\n';
 	}
-	buffer << "Coins : " << maze.getPlayer()->getCountOfCoins() << endl;
-	buffer << "Healths : " << maze.getPlayer()->getHp() << endl;
 	os << buffer.str();
 	return os;
+}
+
+void Maze::drawPlayerFOV() {
+	std::ostringstream buffer;
+	buffer << "vision : \n";
+	for (int y = 0; y < height; y++) {
+		for (int x = 0; x < width; x++) {
+			if (abs(player->getX() - x) < 3) {
+				if (abs(player->getY() - y) < 3) {
+					buffer << field[y][x]->getObject()->getTexture() << " ";
+				}
+			}
+		}
+		if (abs(player->getY() - y) < 3) {
+			buffer << "\n";
+		}
+	}
+	cout << buffer.str();
+}
+
+void Maze::drawPlayerInfo() {
+	std::ostringstream buffer;
+	buffer << "info : \n";
+
+	buffer << "Count Of Coins : " << player->getCountOfCoins() << endl;
+	buffer << "Health points : " << player->getHp() << endl;
+
+	cout << buffer.str();
 }
 
 std::istream& operator>>(std::istream& is, Maze& maze) {

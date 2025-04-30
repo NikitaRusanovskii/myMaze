@@ -19,7 +19,7 @@ void _moveMonsters(shared_ptr<MonstersController> mc) {
 		}
 		catch (Exception ex){
 			if (ex.getInfo() == PlayerDeathException().getInfo()) {
-				system("cls");
+				cout << "\033[2J\033[H";
 				cout << "LOSER";
 				exit(0);
 			}
@@ -28,6 +28,11 @@ void _moveMonsters(shared_ptr<MonstersController> mc) {
 	}
 }
 void Game::run(string name) {
+
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	cout.tie(0);
+
 	srand(time(NULL));
 	int width, height;
 	bool isRunning = true;
@@ -37,8 +42,13 @@ void Game::run(string name) {
 
 	Maze mz(width, height);
 	MazeDrawer mzd(mz);
+	PlayerFOVDrawer pfd(mz);
+	PlayerInfoDrawer pid(mz);
 
 	mzd.subscribeOnMaze();
+	pfd.subscribeOnMaze();
+	pid.subscribeOnMaze();
+
 	file >> mz;
 	file.close();
 	PlayerController pc(mz);
@@ -53,7 +63,7 @@ void Game::run(string name) {
 		}
 		catch (Exception ex) {
 			if (ex.getInfo() == FinishException().getInfo()) {
-				system("cls");
+				cout << "\033[2J\033[H";
 				isRunning = false;
 				cout << "FINISHED";
 			}
