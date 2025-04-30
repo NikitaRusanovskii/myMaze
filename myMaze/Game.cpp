@@ -5,10 +5,30 @@
 #include "MyExceptions.h"
 #include <iostream>
 #include <fstream>
+#include <random>
+#include <thread>
+#include <chrono>
 
 using namespace std;
 
+
+void _moveMonsters(shared_ptr<MonstersController> mc) {
+	while (true) {
+		try {
+			mc->doMove();
+		}
+		catch (Exception ex){
+			if (ex.getInfo() == PlayerDeathException().getInfo()) {
+				system("cls");
+				cout << "LOSER";
+				exit(0);
+			}
+		}
+		this_thread::sleep_for(chrono::milliseconds(1000));
+	}
+}
 void Game::run(string name) {
+	srand(time(NULL));
 	int width, height;
 	bool isRunning = true;
 	fstream file;
@@ -20,8 +40,11 @@ void Game::run(string name) {
 
 	mzd.subscribeOnMaze();
 	file >> mz;
-	PlayerController pc(mz, mz.getPlayer());
+	file.close();
+	PlayerController pc(mz);
+	shared_ptr<MonstersController> mc = make_shared<MonstersController>(mz);
 
+	thread monsterThread(_moveMonsters, mc);
 
 
 	while (isRunning) {
@@ -36,6 +59,5 @@ void Game::run(string name) {
 			}
 		}
 	}
-
-	file.close();
+	monsterThread.detach();
 }

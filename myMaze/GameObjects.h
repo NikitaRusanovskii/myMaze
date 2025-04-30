@@ -58,7 +58,7 @@ public:
 
 class Player : public Entity {
 private:
-	int countOfCoins;
+	int countOfCoins, healthPoints;
 public:
 	Player(int x, int y, char texture);
 	~Player() = default;
@@ -67,13 +67,19 @@ public:
 	void gotCoin();
 	int getCountOfCoins();
 
-	std::string getType() override;
+	int getHp();
+	void takeAwayHp(int damage);
 
+	std::string getType() override;
+	
 };
 
 class Monster : public Entity {
+private:
+	int damage;
 public:
-	Monster(int x, int y, char texture);
+	Monster(int x, int y, int damage, char texture);
 	~Monster() = default;
+	int getDamage();
 	std::string getType() override;
 };

@@ -29,3 +29,18 @@ class FinishException : public Exception {
 public:
 	FinishException() : Exception("finished") {}
 };
+
+class EntityException : public Exception {
+public:
+	EntityException() : Exception("entity hit a other entity") {}
+};
+
+class PlayerHitException : public Exception {
+public:
+	PlayerHitException() : Exception("the monster hit a player") {}
+};
+
+class PlayerDeathException : public Exception {
+public:
+	PlayerDeathException() : Exception("player die") {}
+};

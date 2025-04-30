@@ -35,7 +35,7 @@ int Entity::getY() { return y; }
 void Entity::setX(int _x) { x = _x; }
 void Entity::setY(int _y) { y = _y; }
 
-Player::Player(int x, int y, char texture) : Entity(x, y, texture), countOfCoins(0) {}
+Player::Player(int x, int y, char texture) : Entity(x, y, texture), countOfCoins(0), healthPoints(10) {}
 
 void Player::setCountOfCoins(int cc) {
 	countOfCoins = cc;
@@ -49,7 +49,19 @@ void Player::gotCoin() {
 	countOfCoins++;
 }
 
+int Player::getHp() {
+	return healthPoints;
+}
+
+void Player::takeAwayHp(int damage) {
+	healthPoints -= damage;
+}
+
 std::string Player::getType() { return "Player"; }
 
-Monster::Monster(int x, int y, char texture) : Entity(x, y, texture) {}
+Monster::Monster(int x, int y, int damage, char texture) : Entity(x, y, texture), damage(damage) {}
 std::string Monster::getType() { return "Monster"; }
+
+int Monster::getDamage() {
+	return damage;
+};
